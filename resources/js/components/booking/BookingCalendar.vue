@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 /**
  * Calendar surface for choosing a slot for a given service.
  *
@@ -40,7 +40,7 @@ const cursor = ref(startOfDay(new Date()));
 const slots = ref([]);
 const loading = ref(false);
 
-// Range covering the current view — we always fetch a bit extra so day-clicks within month view are pre-loaded.
+// Range covering the current view â€” we always fetch a bit extra so day-clicks within month view are pre-loaded.
 const range = computed(() => {
     if (view.value === 'day') {
         return { from: cursor.value, to: cursor.value };
@@ -107,7 +107,7 @@ const headerLabel = computed(() => {
     if (view.value === 'day') return fmtDateLong(cursor.value);
     if (view.value === 'month') return fmtMonth(cursor.value);
     const w = weekDays(cursor.value);
-    return `${fmtDateShort(w[0])} – ${fmtDateShort(w[6])}`;
+    return `${fmtDateShort(w[0])} â€“ ${fmtDateShort(w[6])}`;
 });
 
 watch(() => [props.service?.id, view.value, cursor.value], () => fetchSlots(), { deep: false });
@@ -148,7 +148,7 @@ function isSelected(slot) {
                 <span class="text-sm font-semibold text-ink ml-1">{{ headerLabel }}</span>
             </div>
 
-            <div class="inline-flex rounded-xl border border-line p-1 bg-white text-sm self-start">
+            <div class="inline-flex rounded-xl border border-line p-1 bg-surface-raised text-sm self-start">
                 <button
                     v-for="v in ['month', 'week', 'day']"
                     :key="v"
@@ -177,7 +177,7 @@ function isSelected(slot) {
                         type="button"
                         class="aspect-square sm:aspect-auto sm:h-20 rounded-xl border text-left p-2 transition"
                         :class="[
-                            cell.inMonth ? 'border-line bg-white' : 'border-transparent bg-surface-sunken/50 text-ink-soft',
+                            cell.inMonth ? 'border-line bg-surface-raised' : 'border-transparent bg-surface-sunken/50 text-ink-soft',
                             isSameDay(cell.date, cursor) ? 'ring-2 ring-brand-500/40' : '',
                             slotsForDate(cell.date).length > 0 ? 'hover:bg-brand-50 hover:border-brand-300 cursor-pointer' : 'cursor-default',
                         ]"
@@ -203,7 +203,7 @@ function isSelected(slot) {
                 <div
                     v-for="d in weekDays(cursor)"
                     :key="d.toISOString()"
-                    class="rounded-xl border border-line bg-white"
+                    class="rounded-xl border border-line bg-surface-raised"
                 >
                     <div class="px-3 pt-3 pb-2 border-b border-line">
                         <p class="text-[11px] uppercase tracking-wide font-semibold text-ink-soft">{{ d.toLocaleDateString(undefined, { weekday: 'short' }) }}</p>
@@ -220,7 +220,7 @@ function isSelected(slot) {
                         >
                             {{ fmtTime(s.starts_at) }}
                         </button>
-                        <p v-if="slotsForDate(d).length === 0" class="text-xs text-ink-soft text-center py-3">—</p>
+                        <p v-if="slotsForDate(d).length === 0" class="text-xs text-ink-soft text-center py-3">â€”</p>
                     </div>
                 </div>
             </div>

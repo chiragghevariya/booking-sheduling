@@ -52,11 +52,16 @@ class BookingController extends Controller
         if (! empty($validated['status'])) {
             $query->where('status', $validated['status']);
         }
+        // Interpret the filter dates in the requesting user's timezone, then
+        // convert to UTC for the comparison (starts_at is stored in UTC).
+        // Without this, a provider's early-morning bookings (within the UTC
+        // offset) fall on the wrong calendar day in the filter.
+        $tz = $request->user()->timezone ?: config('app.timezone');
         if (! empty($validated['from'])) {
-            $query->where('starts_at', '>=', Carbon::createFromFormat('Y-m-d', $validated['from'])->startOfDay());
+            $query->where('starts_at', '>=', Carbon::createFromFormat('Y-m-d', $validated['from'], $tz)->startOfDay()->setTimezone('UTC'));
         }
         if (! empty($validated['to'])) {
-            $query->where('starts_at', '<=', Carbon::createFromFormat('Y-m-d', $validated['to'])->endOfDay());
+            $query->where('starts_at', '<=', Carbon::createFromFormat('Y-m-d', $validated['to'], $tz)->endOfDay()->setTimezone('UTC'));
         }
 
         $sort = $validated['sort'] ?? '-starts_at';

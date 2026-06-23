@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { computed } from 'vue';
 import { Loader2 } from 'lucide-vue-next';
 
@@ -13,7 +13,7 @@ const props = defineProps({
 
 const variantClasses = {
     primary: 'bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-700 shadow-sm',
-    secondary: 'bg-white text-ink border border-line hover:bg-surface-sunken',
+    secondary: 'bg-surface-raised text-ink border border-line hover:bg-surface-sunken',
     ghost: 'bg-transparent text-ink hover:bg-surface-sunken',
     danger: 'bg-red-600 text-white hover:bg-red-700 shadow-sm',
 };

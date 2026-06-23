@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Customer\BookingController as CustomerBookingController;
 use App\Http\Controllers\Api\DeviceTokenController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\Provider\AvailabilityController;
 use App\Http\Controllers\Api\Provider\AvailabilityExceptionController;
 use App\Http\Controllers\Api\Provider\BookingController as ProviderBookingController;
@@ -37,6 +38,9 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+    // Edit own profile (name/phone/timezone). Works for both cookie (SPA) and token (mobile).
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+
     // Provider availability management (policy enforces role).
     Route::apiResource('availability', AvailabilityController::class);
     Route::apiResource('availability-exceptions', AvailabilityExceptionController::class)

@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Pro Vider',
             'email' => 'provider@example.com',
             'password' => Hash::make('password'),
-            'timezone' => 'UTC',
+            'timezone' => 'Asia/Kolkata',
         ]);
 
         // 3 sample services for the provider

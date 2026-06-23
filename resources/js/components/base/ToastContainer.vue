@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { storeToRefs } from 'pinia';
 import { useToastStore } from '../../stores/toast';
 import { CheckCircle2, AlertCircle, Info, X } from 'lucide-vue-next';
@@ -7,9 +7,9 @@ const toastStore = useToastStore();
 const { toasts } = storeToRefs(toastStore);
 
 const variantClasses = {
-    success: 'border-emerald-200 bg-white',
-    danger: 'border-red-200 bg-white',
-    info: 'border-line bg-white',
+    success: 'border-emerald-200 bg-surface-raised',
+    danger: 'border-red-200 bg-surface-raised',
+    info: 'border-line bg-surface-raised',
 };
 
 const iconMap = {

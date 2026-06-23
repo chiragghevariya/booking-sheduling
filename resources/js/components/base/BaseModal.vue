@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { watch, onMounted, onBeforeUnmount } from 'vue';
 import { X } from 'lucide-vue-next';
 
@@ -47,7 +47,7 @@ watch(
                     @click="emit('close')"
                 ></div>
                 <div
-                    class="relative w-full bg-white rounded-2xl shadow-soft border border-line"
+                    class="relative w-full bg-surface-raised rounded-2xl shadow-soft border border-line"
                     :class="sizes[size] ?? sizes.md"
                 >
                     <div v-if="title || $slots.header" class="flex items-center justify-between px-6 py-4 border-b border-line">

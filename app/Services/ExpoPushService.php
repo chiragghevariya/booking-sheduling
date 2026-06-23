@@ -43,6 +43,15 @@ class ExpoPushService
         );
     }
 
+    public function bookingCancelled(Booking $booking): void
+    {
+        $this->sendToCustomer(
+            $booking,
+            title: 'Booking cancelled',
+            body: $this->bookingLine($booking, 'was cancelled'),
+        );
+    }
+
     /**
      * Send to every device token registered against the booking's customer.
      * Silently logs and continues on any failure — push is best-effort.
@@ -91,7 +100,12 @@ class ExpoPushService
     private function bookingLine(Booking $booking, string $verbPhrase): string
     {
         $service = $booking->service?->name ?? 'Your booking';
-        $when = $booking->starts_at?->isoFormat('ddd, MMM D · h:mm A') ?? '';
+
+        // Show the time in the provider's timezone (stored as UTC) with an
+        // abbreviation label (e.g. IST), so the customer reads the real time.
+        $tz = $booking->provider?->timezone ?? config('app.timezone');
+        $start = $booking->starts_at?->copy()->setTimezone($tz);
+        $when = $start ? $start->isoFormat('ddd, MMM D · h:mm A').' '.$start->format('T') : '';
 
         return trim("{$service} {$verbPhrase}" . ($when ? " — {$when}" : ''));
     }

@@ -19,7 +19,15 @@ export function isSameDay(a, b) {
 }
 
 export function toISODate(d) {
-    return new Date(d).toISOString().slice(0, 10);
+    // Use LOCAL date components, not toISOString() (which is UTC). The calendar
+    // grid is built from local Date objects, so bucketing slots by their UTC
+    // date would shift them by a day in non-UTC zones (e.g. UTC+5:30 → slots
+    // appear on the following day). Keeping everything local keeps them aligned.
+    const x = new Date(d);
+    const y = x.getFullYear();
+    const m = String(x.getMonth() + 1).padStart(2, '0');
+    const day = String(x.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
 }
 
 /**

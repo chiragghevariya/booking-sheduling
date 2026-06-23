@@ -3,6 +3,38 @@
 @tailwind utilities;
 
 @layer base {
+    /* Theme tokens as space-separated RGB channels (so rgb(var(--x) / <alpha>) works).
+       Light on :root, dark under .dark. A `dark` class on <html> flips the theme.
+       Status colors (emerald/red/amber) are NOT variables — they keep meaning. */
+    :root {
+        --color-ink: 15 23 42;            /* #0F172A primary text */
+        --color-ink-muted: 71 85 105;     /* #475569 */
+        --color-ink-soft: 100 116 139;    /* #64748B */
+        --color-surface: 248 250 252;     /* #F8FAFC page background */
+        --color-surface-raised: 255 255 255; /* #FFFFFF cards */
+        --color-surface-sunken: 241 245 249; /* #F1F5F9 hover/secondary */
+        --color-line: 226 232 240;        /* #E2E8F0 borders */
+
+        /* Make native controls (date/time pickers, <select>, scrollbars) follow the
+           theme. Forced to `light` here so the app stays light even on a dark OS. */
+        color-scheme: light;
+        accent-color: #6366F1;            /* brand-500 — checkbox/radio/date accent */
+    }
+
+    .dark {
+        --color-ink: 241 245 249;         /* #F1F5F9 primary text */
+        --color-ink-muted: 203 213 225;   /* #CBD5E1 */
+        --color-ink-soft: 148 163 184;    /* #94A3B8 */
+        --color-surface: 15 23 42;        /* #0F172A page background */
+        --color-surface-raised: 30 41 59; /* #1E293B cards */
+        --color-surface-sunken: 51 65 85; /* #334155 hover/secondary */
+        --color-line: 51 65 85;           /* #334155 borders */
+
+        /* Native date/time picker, dropdowns and scrollbars render dark to match. */
+        color-scheme: dark;
+        accent-color: #818CF8;            /* brand-400 — lighter accent on dark */
+    }
+
     html {
         font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -34,7 +66,7 @@
 
 @layer components {
     .input-base {
-        @apply w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-sm text-ink shadow-sm
+        @apply w-full rounded-xl border border-line bg-surface-raised px-3.5 py-2.5 text-sm text-ink shadow-sm
                placeholder:text-ink-soft focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30
                disabled:opacity-60 disabled:cursor-not-allowed transition;
     }

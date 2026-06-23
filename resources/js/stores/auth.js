@@ -63,5 +63,13 @@ export const useAuthStore = defineStore('auth', {
                 this.user = null;
             }
         },
+
+        // Update the signed-in user's own profile (e.g. timezone) and refresh state.
+        async updateProfile(payload) {
+            await ensureCsrf();
+            const { data } = await api.patch('/api/profile', payload);
+            this.user = data.data ?? data;
+            return this.user;
+        },
     },
 });

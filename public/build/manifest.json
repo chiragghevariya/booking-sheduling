@@ -1,0 +1,259 @@
+{
+  "_AuthLayout-CRQ8s7BW.js": {
+    "file": "assets/AuthLayout-CRQ8s7BW.js",
+    "name": "AuthLayout",
+    "imports": [
+      "_calendar-check-BkhX6o09.js",
+      "resources/js/app.js"
+    ]
+  },
+  "_BaseBadge-Ch6g3xvR.js": {
+    "file": "assets/BaseBadge-Ch6g3xvR.js",
+    "name": "BaseBadge",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_BaseButton-DaQlF034.js": {
+    "file": "assets/BaseButton-DaQlF034.js",
+    "name": "BaseButton",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_BaseInput-B_bE0Dhf.js": {
+    "file": "assets/BaseInput-B_bE0Dhf.js",
+    "name": "BaseInput",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_BaseModal-B1dI_hug.js": {
+    "file": "assets/BaseModal-B1dI_hug.js",
+    "name": "BaseModal",
+    "imports": [
+      "resources/js/app.js"
+    ],
+    "css": [
+      "assets/BaseModal-BThd3UxP.css"
+    ]
+  },
+  "_BaseModal-BThd3UxP.css": {
+    "file": "assets/BaseModal-BThd3UxP.css",
+    "src": "_BaseModal-BThd3UxP.css"
+  },
+  "_EmptyState-lVO_qUBT.js": {
+    "file": "assets/EmptyState-lVO_qUBT.js",
+    "name": "EmptyState",
+    "imports": [
+      "resources/js/app.js",
+      "_calendar-check-BkhX6o09.js"
+    ],
+    "css": [
+      "assets/EmptyState-mOMGcGRd.css"
+    ]
+  },
+  "_EmptyState-mOMGcGRd.css": {
+    "file": "assets/EmptyState-mOMGcGRd.css",
+    "src": "_EmptyState-mOMGcGRd.css"
+  },
+  "_bookings-C8uyJatg.js": {
+    "file": "assets/bookings-C8uyJatg.js",
+    "name": "bookings",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_calendar-D7_3Mj29.js": {
+    "file": "assets/calendar-D7_3Mj29.js",
+    "name": "calendar"
+  },
+  "_calendar-check-BkhX6o09.js": {
+    "file": "assets/calendar-check-BkhX6o09.js",
+    "name": "calendar-check",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_circle-x-C_Lrg1Lg.js": {
+    "file": "assets/circle-x-C_Lrg1Lg.js",
+    "name": "circle-x",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_providerBookings-Do8fHupY.js": {
+    "file": "assets/providerBookings-Do8fHupY.js",
+    "name": "providerBookings",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_trash-2-COrZDTd4.js": {
+    "file": "assets/trash-2-COrZDTd4.js",
+    "name": "trash-2",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-BqPNBo-c.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DfscBosC.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/pages/auth/Login.vue",
+      "resources/js/pages/auth/Register.vue",
+      "resources/js/pages/dashboard/Dashboard.vue",
+      "resources/js/pages/customer/BookLanding.vue",
+      "resources/js/pages/customer/MyBookings.vue",
+      "resources/js/pages/provider/Availability.vue",
+      "resources/js/pages/provider/Bookings.vue",
+      "resources/js/pages/provider/Services.vue",
+      "resources/js/pages/NotFound.vue"
+    ],
+    "css": [
+      "assets/app-BzdSWUiQ.css"
+    ]
+  },
+  "resources/js/pages/NotFound.vue": {
+    "file": "assets/NotFound-BpUR3Gfi.js",
+    "name": "NotFound",
+    "src": "resources/js/pages/NotFound.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_BaseButton-DaQlF034.js"
+    ]
+  },
+  "resources/js/pages/auth/Login.vue": {
+    "file": "assets/Login-DPb7riF_.js",
+    "name": "Login",
+    "src": "resources/js/pages/auth/Login.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_AuthLayout-CRQ8s7BW.js",
+      "_BaseInput-B_bE0Dhf.js",
+      "_BaseButton-DaQlF034.js",
+      "_calendar-check-BkhX6o09.js"
+    ]
+  },
+  "resources/js/pages/auth/Register.vue": {
+    "file": "assets/Register-CLQlO0Fm.js",
+    "name": "Register",
+    "src": "resources/js/pages/auth/Register.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_AuthLayout-CRQ8s7BW.js",
+      "_BaseInput-B_bE0Dhf.js",
+      "_BaseButton-DaQlF034.js",
+      "_calendar-check-BkhX6o09.js"
+    ]
+  },
+  "resources/js/pages/customer/BookLanding.vue": {
+    "file": "assets/BookLanding-C4AtCMeR.js",
+    "name": "BookLanding",
+    "src": "resources/js/pages/customer/BookLanding.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_EmptyState-lVO_qUBT.js",
+      "_BaseButton-DaQlF034.js",
+      "_BaseModal-B1dI_hug.js",
+      "_BaseInput-B_bE0Dhf.js",
+      "_calendar-D7_3Mj29.js",
+      "_bookings-C8uyJatg.js",
+      "_calendar-check-BkhX6o09.js"
+    ]
+  },
+  "resources/js/pages/customer/MyBookings.vue": {
+    "file": "assets/MyBookings-CwIMiaQA.js",
+    "name": "MyBookings",
+    "src": "resources/js/pages/customer/MyBookings.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_EmptyState-lVO_qUBT.js",
+      "_BaseBadge-Ch6g3xvR.js",
+      "_BaseButton-DaQlF034.js",
+      "_BaseModal-B1dI_hug.js",
+      "_bookings-C8uyJatg.js",
+      "_calendar-D7_3Mj29.js",
+      "_circle-x-C_Lrg1Lg.js",
+      "_calendar-check-BkhX6o09.js"
+    ]
+  },
+  "resources/js/pages/dashboard/Dashboard.vue": {
+    "file": "assets/Dashboard-fYZXaguD.js",
+    "name": "Dashboard",
+    "src": "resources/js/pages/dashboard/Dashboard.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_EmptyState-lVO_qUBT.js",
+      "_BaseBadge-Ch6g3xvR.js",
+      "_BaseButton-DaQlF034.js",
+      "_providerBookings-Do8fHupY.js",
+      "_calendar-D7_3Mj29.js",
+      "_calendar-check-BkhX6o09.js"
+    ]
+  },
+  "resources/js/pages/provider/Availability.vue": {
+    "file": "assets/Availability-HmipWZge.js",
+    "name": "Availability",
+    "src": "resources/js/pages/provider/Availability.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_EmptyState-lVO_qUBT.js",
+      "_BaseButton-DaQlF034.js",
+      "_BaseBadge-Ch6g3xvR.js",
+      "_BaseModal-B1dI_hug.js",
+      "_BaseInput-B_bE0Dhf.js",
+      "_trash-2-COrZDTd4.js",
+      "_circle-x-C_Lrg1Lg.js",
+      "_calendar-check-BkhX6o09.js"
+    ]
+  },
+  "resources/js/pages/provider/Bookings.vue": {
+    "file": "assets/Bookings-3huHMHpH.js",
+    "name": "Bookings",
+    "src": "resources/js/pages/provider/Bookings.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_EmptyState-lVO_qUBT.js",
+      "_BaseBadge-Ch6g3xvR.js",
+      "_BaseButton-DaQlF034.js",
+      "_BaseInput-B_bE0Dhf.js",
+      "_BaseModal-B1dI_hug.js",
+      "_providerBookings-Do8fHupY.js",
+      "_calendar-D7_3Mj29.js",
+      "_circle-x-C_Lrg1Lg.js",
+      "_calendar-check-BkhX6o09.js"
+    ]
+  },
+  "resources/js/pages/provider/Services.vue": {
+    "file": "assets/Services-BfMjEKoG.js",
+    "name": "Services",
+    "src": "resources/js/pages/provider/Services.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_EmptyState-lVO_qUBT.js",
+      "_BaseButton-DaQlF034.js",
+      "_BaseInput-B_bE0Dhf.js",
+      "_BaseModal-B1dI_hug.js",
+      "_BaseBadge-Ch6g3xvR.js",
+      "_trash-2-COrZDTd4.js",
+      "_calendar-check-BkhX6o09.js"
+    ]
+  }
+}

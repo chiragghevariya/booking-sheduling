@@ -39,6 +39,10 @@ class BookingService
      */
     public function request(User $customer, Service $service, Carbon $startsAt, array $extras = []): Booking
     {
+        // Persist bookings in UTC. The incoming time may carry the provider's
+        // offset (the slot API emits e.g. +05:30); normalize so the stored
+        // instant is unambiguous and overlap math lines up across timezones.
+        $startsAt = $startsAt->copy()->setTimezone('UTC');
         $endsAt = $startsAt->copy()->addMinutes($service->duration_minutes);
         $provider = $service->provider;
         $buffer = $service->buffer_minutes;
@@ -99,6 +103,8 @@ class BookingService
      */
     public function reschedule(Booking $booking, Carbon $newStart): Booking
     {
+        // Normalize to UTC for storage (see request()).
+        $newStart = $newStart->copy()->setTimezone('UTC');
         $service = $booking->service;
         $newEnd = $newStart->copy()->addMinutes($service->duration_minutes);
         $buffer = $service->buffer_minutes;
@@ -256,6 +262,8 @@ class BookingService
     {
         $fresh = $this->cancel($booking)->fresh(['customer', 'service', 'provider']);
         Mail::to($fresh->customer->email)->queue(new BookingCancelled($fresh, 'customer'));
+        // Push: notify the customer their approved booking was cancelled.
+        $this->push->bookingCancelled($fresh);
 
         return $fresh;
     }

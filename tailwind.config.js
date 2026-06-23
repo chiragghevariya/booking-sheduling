@@ -2,6 +2,8 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+    // Class-based dark mode — a `dark` class on <html> flips the CSS variables.
+    darkMode: 'class',
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
@@ -15,6 +17,7 @@ export default {
                 sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                // Brand stays constant across themes (indigo works on light + dark).
                 brand: {
                     50: '#EEF2FF',
                     100: '#E0E7FF',
@@ -26,20 +29,22 @@ export default {
                     700: '#4338CA',
                     DEFAULT: '#6366F1',
                 },
+                // Neutral tokens read CSS variables (light + dark defined in app.css),
+                // so every bg-surface / text-ink / border-line auto-adapts to the theme.
                 ink: {
-                    DEFAULT: '#0F172A',
-                    muted: '#475569',
-                    soft: '#64748B',
+                    DEFAULT: 'rgb(var(--color-ink) / <alpha-value>)',
+                    muted: 'rgb(var(--color-ink-muted) / <alpha-value>)',
+                    soft: 'rgb(var(--color-ink-soft) / <alpha-value>)',
                 },
                 surface: {
-                    DEFAULT: '#F8FAFC',
-                    raised: '#FFFFFF',
-                    sunken: '#F1F5F9',
+                    DEFAULT: 'rgb(var(--color-surface) / <alpha-value>)',
+                    raised: 'rgb(var(--color-surface-raised) / <alpha-value>)',
+                    sunken: 'rgb(var(--color-surface-sunken) / <alpha-value>)',
                 },
-                line: '#E2E8F0',
+                line: 'rgb(var(--color-line) / <alpha-value>)',
             },
             borderColor: {
-                DEFAULT: '#E2E8F0',
+                DEFAULT: 'rgb(var(--color-line) / <alpha-value>)',
             },
             boxShadow: {
                 soft: '0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.06)',

@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import DashboardLayout from '../../layouts/DashboardLayout.vue';
@@ -81,7 +81,7 @@ async function submitBooking() {
         lastBooking.value = booking;
         showBookingModal.value = false;
         showSuccessModal.value = true;
-        toast.success('Request sent — we\'ll notify the provider.');
+        toast.success('Request sent â€” we\'ll notify the provider.');
     } catch (e) {
         if (e.response?.status === 422) {
             errors.value = mapErrors(e.response.data.errors);
@@ -103,7 +103,7 @@ async function confirmReschedule(slot) {
     submitting.value = true;
     try {
         await bookings.reschedule(rescheduleId.value, slot.starts_at);
-        toast.success('Booking rescheduled — pending re-approval.');
+        toast.success('Booking rescheduled â€” pending re-approval.');
         router.push('/my-bookings');
     } catch (e) {
         if (e.response?.status === 422) {
@@ -177,7 +177,7 @@ watch(rescheduleId, () => prefillForReschedule());
                         <template v-else>Book a service</template>
                     </h2>
                     <p class="mt-1 text-sm text-ink-soft">
-                        <template v-if="rescheduleMode">Pick a new time below — it'll go back to the provider for approval.</template>
+                        <template v-if="rescheduleMode">Pick a new time below â€” it'll go back to the provider for approval.</template>
                         <template v-else>Pick a service, then a time that works for you.</template>
                     </p>
                 </div>
@@ -194,7 +194,7 @@ watch(rescheduleId, () => prefillForReschedule());
                 <EmptyState
                     v-else-if="services.length === 0"
                     title="No services available"
-                    description="Check back soon — providers haven't published anything bookable yet."
+                    description="Check back soon â€” providers haven't published anything bookable yet."
                 >
                     <template #icon><Briefcase class="w-6 h-6" /></template>
                 </EmptyState>
@@ -203,7 +203,7 @@ watch(rescheduleId, () => prefillForReschedule());
                         v-for="svc in services"
                         :key="svc.id"
                         type="button"
-                        class="text-left rounded-2xl border border-line bg-white p-5 shadow-soft hover:border-brand-300 hover:shadow-md transition"
+                        class="text-left rounded-2xl border border-line bg-surface-raised p-5 shadow-soft hover:border-brand-300 hover:shadow-md transition"
                         @click="pickService(svc)"
                     >
                         <p class="text-xs font-medium uppercase tracking-wide text-brand-600">{{ svc.provider?.name }}</p>
@@ -225,7 +225,7 @@ watch(rescheduleId, () => prefillForReschedule());
                     <div>
                         <p class="text-xs font-medium uppercase tracking-wide text-brand-600">{{ selectedService.provider?.name }}</p>
                         <h3 class="text-base font-semibold text-ink">{{ selectedService.name }}</h3>
-                        <p class="text-xs text-ink-soft mt-0.5">{{ selectedService.duration_minutes }} min · {{ moneyFmt(selectedService.price, selectedService.currency) }}</p>
+                        <p class="text-xs text-ink-soft mt-0.5">{{ selectedService.duration_minutes }} min Â· {{ moneyFmt(selectedService.price, selectedService.currency) }}</p>
                     </div>
                 </div>
 
@@ -242,7 +242,7 @@ watch(rescheduleId, () => prefillForReschedule());
             <div v-if="selectedSlot" class="rounded-xl bg-surface-sunken px-4 py-3 mb-4">
                 <p class="text-sm font-semibold text-ink">{{ selectedService.name }}</p>
                 <p class="text-xs text-ink-muted mt-0.5">{{ fmtDateLong(selectedSlot.starts_at) }} at {{ fmtTime(selectedSlot.starts_at) }}</p>
-                <p class="text-xs text-ink-soft mt-0.5">with {{ selectedService.provider?.name }} · {{ selectedService.duration_minutes }} min</p>
+                <p class="text-xs text-ink-soft mt-0.5">with {{ selectedService.provider?.name }} Â· {{ selectedService.duration_minutes }} min</p>
             </div>
 
             <form @submit.prevent="submitBooking" class="space-y-3">

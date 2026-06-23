@@ -83,7 +83,11 @@ function openExceptionModal() {
 }
 
 function today() {
-    return new Date().toISOString().slice(0, 10);
+    // Local date (not toISOString() which is UTC). In UTC+ zones the UTC date
+    // can still be "yesterday" in the early morning, defaulting the override
+    // modal to the wrong day.
+    const x = new Date();
+    return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
 }
 
 async function submitException() {

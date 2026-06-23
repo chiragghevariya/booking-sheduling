@@ -53,13 +53,24 @@ class SlotAvailabilityService
         $ignoreBookings = $opts['ignoreBookings'] ?? false;
         $statuses = $opts['statuses'] ?? [Booking::STATUS_PENDING, Booking::STATUS_APPROVED];
 
+        // Availability start/end times are wall-clock in the PROVIDER's timezone.
+        // Generate slots on the provider's local calendar so the emitted ISO
+        // strings carry the correct offset (e.g. +05:30) and the weekday mapping
+        // (windowsForDay -> $date->dayOfWeek) uses the provider's local day, not
+        // UTC. Bookings are stored in UTC; every comparison below is instant-based,
+        // so results stay correct regardless of the provider's or viewer's zone.
+        $tz = $provider->timezone ?: config('app.timezone');
+
+        $rangeStart = $from->copy()->setTimezone($tz)->startOfDay();
+        $rangeEnd = $to->copy()->setTimezone($tz)->endOfDay();
+
         $weekly = $provider->availabilities()
             ->where('is_active', true)
             ->get()
             ->groupBy('day_of_week');
 
         $exceptions = $provider->availabilityExceptions()
-            ->whereBetween('date', [$from->copy()->startOfDay(), $to->copy()->endOfDay()])
+            ->whereBetween('date', [$rangeStart->toDateString(), $rangeEnd->toDateString()])
             ->get()
             ->groupBy(fn (AvailabilityException $e) => $e->date->toDateString());
 
@@ -68,13 +79,14 @@ class SlotAvailabilityService
             : Booking::query()
                 ->where('provider_id', $provider->id)
                 ->whereIn('status', $statuses)
-                ->where('starts_at', '<', $to->copy()->endOfDay())
-                ->where('ends_at', '>', $from->copy()->startOfDay())
+                // Bind UTC instants — the stored starts_at/ends_at columns are UTC.
+                ->where('starts_at', '<', $rangeEnd->copy()->setTimezone('UTC'))
+                ->where('ends_at', '>', $rangeStart->copy()->setTimezone('UTC'))
                 ->get();
 
         $slots = [];
-        $cursor = $from->copy()->startOfDay();
-        $end = $to->copy()->startOfDay();
+        $cursor = $rangeStart->copy();
+        $end = $rangeEnd->copy()->startOfDay();
 
         while ($cursor->lte($end)) {
             $dayStr = $cursor->toDateString();

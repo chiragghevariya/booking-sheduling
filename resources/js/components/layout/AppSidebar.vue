@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import {
@@ -50,7 +50,7 @@ const nav = computed(() => {
     </Transition>
 
     <aside
-        class="fixed lg:sticky top-0 left-0 z-50 h-screen bg-white border-r border-line flex flex-col
+        class="fixed lg:sticky top-0 left-0 z-50 h-screen bg-surface-raised border-r border-line flex flex-col
                transition-[width,transform] duration-200 ease-out"
         :class="[
             collapsed ? 'lg:w-sidebar-collapsed' : 'lg:w-sidebar',

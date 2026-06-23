@@ -1,9 +1,10 @@
-<script setup>
+﻿<script setup>
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue';
 import { useRouter } from 'vue-router';
-import { Menu, ChevronDown, LogOut } from 'lucide-vue-next';
+import { Menu, ChevronDown, LogOut, Sun, Moon } from 'lucide-vue-next';
 import { useAuthStore } from '../../stores/auth';
 import { useToastStore } from '../../stores/toast';
+import { useThemeStore } from '../../stores/theme';
 
 defineProps({
     pageTitle: { type: String, default: '' },
@@ -13,6 +14,7 @@ const emit = defineEmits(['toggle-mobile']);
 
 const auth = useAuthStore();
 const toast = useToastStore();
+const theme = useThemeStore();
 const router = useRouter();
 
 const initials = computed(() => {
@@ -51,7 +53,7 @@ async function logout() {
 </script>
 
 <template>
-    <header class="sticky top-0 z-30 h-topbar bg-white/85 backdrop-blur border-b border-line">
+    <header class="sticky top-0 z-30 h-topbar bg-surface-raised/85 backdrop-blur border-b border-line">
         <div class="h-full px-4 sm:px-6 flex items-center justify-between gap-3">
             <div class="flex items-center gap-3 min-w-0">
                 <button
@@ -63,6 +65,18 @@ async function logout() {
                 </button>
                 <h1 v-if="pageTitle" class="text-sm sm:text-base font-semibold text-ink truncate">{{ pageTitle }}</h1>
             </div>
+
+            <div class="flex items-center gap-1.5">
+            <button
+                type="button"
+                class="inline-flex items-center justify-center w-9 h-9 rounded-lg text-ink-muted hover:bg-surface-sunken transition"
+                @click="theme.toggle()"
+                :aria-label="theme.isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+                :title="theme.isDark ? 'Light mode' : 'Dark mode'"
+            >
+                <Sun v-if="theme.isDark" class="w-5 h-5" />
+                <Moon v-else class="w-5 h-5" />
+            </button>
 
             <div class="relative" ref="menuRef">
                 <button
@@ -82,7 +96,7 @@ async function logout() {
                 <Transition name="menu">
                     <div
                         v-if="menuOpen"
-                        class="absolute right-0 mt-2 w-56 bg-white border border-line rounded-xl shadow-soft py-1.5 overflow-hidden"
+                        class="absolute right-0 mt-2 w-56 bg-surface-raised border border-line rounded-xl shadow-soft py-1.5 overflow-hidden"
                     >
                         <div class="px-3 py-2 border-b border-line">
                             <p class="text-sm font-semibold text-ink truncate">{{ auth.user?.name }}</p>
@@ -96,6 +110,7 @@ async function logout() {
                         </button>
                     </div>
                 </Transition>
+            </div>
             </div>
         </div>
     </header>

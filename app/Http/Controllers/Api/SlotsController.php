@@ -28,9 +28,14 @@ class SlotsController extends Controller
 
         $service = Service::with('provider')->findOrFail($data['service_id']);
 
+        // Interpret the requested range in the PROVIDER's timezone so day
+        // boundaries line up with how availability is authored and emitted.
+        // startOfDay() also normalizes away createFromFormat's "current time".
+        $tz = $service->provider->timezone ?: config('app.timezone');
+
         // Cap the lookahead window to keep responses bounded.
-        $from = Carbon::createFromFormat('Y-m-d', $data['from']);
-        $to = Carbon::createFromFormat('Y-m-d', $data['to']);
+        $from = Carbon::createFromFormat('Y-m-d', $data['from'], $tz)->startOfDay();
+        $to = Carbon::createFromFormat('Y-m-d', $data['to'], $tz)->startOfDay();
         if ($from->diffInDays($to) > 60) {
             $to = $from->copy()->addDays(60);
         }
